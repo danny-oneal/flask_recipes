@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+{% set title = "User Actions" %}
+{% block content %}
+<div class="grid grid-flow-col gap-5 items-start">
+    <form action="/users/create" method="POST" class="bg-slate-200 p-5 rounded">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">
+            First Name
+        </label>
+        <input
+            class="mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="first_name" name="first_name" type="text" placeholder="First Name"
+            value="{{session['first_name'] if session['first_name'] else '' }}">
+        {% with errors = get_flashed_messages(category_filter=["first_name"]) %}
+        {% if errors %}
+        <div class="text-red-500">
+            <ul>
+                {%- for msg in errors %}
+                <li>{{ msg }}</li>
+                {% endfor -%}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="last_name">
+            Last Name
+        </label>
+        <input
+            class="mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="last_name" name="last_name" type="text" placeholder="Last Name"
+            value="{{session['last_name'] if session['last_name'] else '' }}">
+        {% with errors = get_flashed_messages(category_filter=["last_name"]) %}
+        {% if errors %}
+        <div class="text-red-500">
+            <ul>
+                {%- for msg in errors %}
+                <li>{{ msg }}</li>
+                {% endfor -%}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+            Email
+        </label>
+        <input
+            class="mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="email" name="email" type="text" placeholder="user@domain.com"
+            value="{{session['email'] if session['email'] else '' }}">
+        {% with errors = get_flashed_messages(category_filter=["email"]) %}
+        {% if errors %}
+        <div class="text-red-500">
+            <ul>
+                {%- for msg in errors %}
+                <li>{{ msg }}</li>
+                {% endfor -%}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+            Password
+        </label>
+        <input
+            class="mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password" name="password" type="password" placeholder="At least 8 characters">
+        {% with errors = get_flashed_messages(category_filter=["password"]) %}
+        {% if errors %}
+        <div class="text-red-500">
+            <ul>
+                {%- for msg in errors %}
+                <li>{{ msg }}</li>
+                {% endfor -%}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="confirm_password">
+            Confirm Password
+        </label>
+        <input
+            class="mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="confirm_password" name="confirm_password" type="password">
+        {% with errors = get_flashed_messages(category_filter=["confirm_password"]) %}
+        {% if errors %}
+        <div class="text-red-500">
+            <ul>
+                {%- for msg in errors %}
+                <li>{{ msg }}</li>
+                {% endfor -%}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit">Register</button>
+    </form>
+    <form action="/auth/login" method="POST" class="bg-slate-200 p-5 rounded">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+            Email
+        </label>
+        <input
+            class="mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="auth_email" name="email" type="text" placeholder="user@domain.com">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+            Password
+        </label>
+        <input
+            class="mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="auth_password" name="password" type="password">
+        {% with errors = get_flashed_messages(category_filter=["auth"]) %}
+        {% if errors %}
+        <div class="text-red-500">
+            <ul>
+                {%- for msg in errors %}
+                <li>{{ msg }}</li>
+                {% endfor -%}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit">Log In</button>
+    </form>
+</div>
+{% endblock content %}

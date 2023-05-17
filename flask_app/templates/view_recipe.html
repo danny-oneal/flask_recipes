@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% set title = "Update Recipe" %}
+{% block content %}
+<div class="grid grid-flow-col justify-between items-center mb-4">
+    <h1 class="text-5xl">Welcome {{session["user"].first_name}}</h1>
+    <div>
+        <a href="/recipes"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Recipe
+            List</a>
+        <a href="/auth/logout"
+            class="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</a>
+    </div>
+</div>
+<div class="grid">
+    <div class="grid grid-flow-col justify-between items-center mb-4">
+        <h2 class="text-4xl">{{one_recipe.name}}</h2>
+        <p><span class="font-bold">Posted by:</span> {{one_recipe.chef}}</p>
+    </div>
+    <div class="border-2 border-black p-5 rounded">
+        <div class="grid grid-cols-2 gap-y-8">
+            <p>Description:</p>
+            <p>{{one_recipe.description}}</p>
+            <p>Under 30 Minutes?</p>
+            <p>{{"No" if one_recipe.is_under_30_min == 0 else "Yes"}}</p>
+            <p>Instructions:</p>
+            <p>{{one_recipe.instructions}}</p>
+            <p>Date Made:</p>
+            <p>{{one_recipe.cook_date}}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

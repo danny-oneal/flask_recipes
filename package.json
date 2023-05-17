@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
+  },
+  "scripts": {
+    "build:css": "tailwindcss build -i src/input.css -o flask_app/static/css/style.css",
+    "watch:css": "tailwindcss build -i src/input.css -o flask_app/static/css/style.css --watch"
+  }
+}

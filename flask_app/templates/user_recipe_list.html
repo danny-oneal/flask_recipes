@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% set title = "Recipes" %}
+{% block content %}
+<h1 class="text-5xl mb-4">Welcome, {{session["user"].first_name}}</h1>
+<div class="grid grid-flow-col justify-between mb-4">
+    <h3 class="text-3l">All posted recipes:</h3>
+    <div>
+        <a href="/recipes/new"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create</a>
+        <a href="/auth/logout"
+            class="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</a>
+    </div>
+</div>
+<div class="grid gap-3 grid-cols-4 justify-between">
+    <p class="text-3xl">Name</p>
+    <p class="text-3xl">Under 30 Mins</p>
+    <p class="text-3xl">Posted By</p>
+    <p class="text-3xl">Actions</p>
+    {% for recipe in all_recipes %}
+    <p class="text-2xl">{{recipe.name}}</p>
+    <p class="text-2xl">{{"No" if recipe.is_under_30_min == 0 else "Yes"}}</p>
+    <p class="text-2xl">{{recipe.chef.first_name}}</p>
+    <div class="grid gap-2 grid-cols-3">
+        <a href="/recipes/{{recipe.id}}"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">View</a>
+        {% if recipe.chef.id == session["user"].id %}
+        <a href="/recipes/{{recipe.id}}/edit"
+            class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Edit</a>
+        <a href="/recipes/{{recipe.id}}/delete"
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
